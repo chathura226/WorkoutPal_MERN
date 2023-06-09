@@ -1,0 +1,7 @@
+npm init -y
+npm install express  //installing express
+node server.js //run server.js file
+npm install -g nodemon //installing nodemon globally
+nodemon server.js //run like "node server.js" but no need to manually restart if we change the server.js file
+add " "dev": "nodemon server.js" " to package.jason //type npm run dev on terminal and it will do the nodemon server.js command
+npm install mongoose
