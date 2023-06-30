@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express=require('express')
 const workoutRoutes=require('./routes/workouts')
+const userRoutes=require('./routes/user')
 //import mongoose
 const mongoose=require('mongoose')
 //express app
@@ -15,6 +16,8 @@ app.use((req,res,next)=>{
 
 //route
 app.use('/api/workouts',workoutRoutes) //fire these routes when comes to specific path in first argument ('/api/workouts')
+app.use('/api/user',userRoutes)
+
 
 //connect to db and connecting to a db is asynchronous (take time)
 mongoose.connect(process.env.MONGO_URI)
