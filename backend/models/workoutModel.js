@@ -16,6 +16,10 @@ const workoutSchema=new Schema({
     load:{
         type:Number,
         required:true
+    },
+    user_id:{
+        type:String,
+        required:true
     }
 },{//this is the second argument
     timestamps:true//automatically add created/updated time

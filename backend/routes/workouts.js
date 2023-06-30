@@ -7,7 +7,12 @@ const{
     updateWorkout
 }=require('../controllers/workoutController')
 
+const requireAuth=require('../middleware/requireAuth')//importing middleware
 const router=express.Router()
+
+//require authenticating user
+router.use(requireAuth); //fire the middleware function before firing below things
+
 
 //get all workouts
 router.get('/',getWorkouts)

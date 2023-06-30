@@ -3,12 +3,17 @@ import { useWorkoutContext } from "../hooks/useWorkoutContext"
 //components
 import WorkoutDetails from '../components/WorkoutDetails'
 import WorkoutForm from '../components/workoutForm'
-
+import {useAuthContext} from '../hooks/useAuthContext'
 const Home=()=>{
     const {workouts,dispatch}=useWorkoutContext();
+    const {user}=useAuthContext();
     useEffect(()=>{
         const fetchWorkouts=async()=>{
-            const response=await fetch('/api/workouts')
+            const response=await fetch('/api/workouts',{
+                headers:{
+                    'Authorization':`Bearer ${user.token}`
+                }
+            })
             const json=await response.json()
 
             if(response.ok){
@@ -19,8 +24,10 @@ const Home=()=>{
                 
             }
         }
-        fetchWorkouts()
-    },[dispatch])//using '[]' as second arg make it fire only once
+        if(user){
+            fetchWorkouts()
+        }
+    },[dispatch,user])//using '[]' as second arg make it fire only once
     return(
         <div className="home">
             <div className="workouts">

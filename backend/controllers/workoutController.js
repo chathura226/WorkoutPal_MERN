@@ -2,7 +2,8 @@ const Workout=require('../models/workoutModel')
 const mongoose=require('mongoose')
 //GET all workouts
 const getWorkouts=async(req,res)=>{
-    const workouts=await Workout.find({}).sort({createdAt:-1})//sort in descending order of date
+    const user_id=req.user._id;
+    const workouts=await Workout.find({user_id}).sort({createdAt:-1})//sort in descending order of date
 
     res.status(200).json(workouts)
 }
@@ -33,7 +34,8 @@ const createWorkout=async(req,res)=>{
     }
     //add to db
     try{
-        const workout=await Workout.create({title,load,reps})
+        const user_id=req.user._id;//the id is passed by the middle ware along the request
+        const workout=await Workout.create({title,load,reps,user_id})
         res.status(200).json(workout)
     }catch(error){
         res.status(400).json({error:error.message})
